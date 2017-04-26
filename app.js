@@ -16,5 +16,12 @@ app.route('/books')
             .catch(err => res.status(412));
     });
 
+app.route('/books/:id')
+    .get((req, res) => {
+        Books.findOne({ where: req.params })
+            .then(result => res.json(result))
+            .catch(err => res.status(412));
+    });
+
 //se não passar ele import esse como padão "default"
 export default app;
