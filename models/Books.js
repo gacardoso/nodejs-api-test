@@ -1,7 +1,7 @@
 export default (sequelize, DataType) => {
     const Books = sequelize.define('Books', {
         id: {
-            type: DataType.INTERGER,
+            type: DataType.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },

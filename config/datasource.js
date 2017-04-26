@@ -20,7 +20,7 @@ export default (app) => {
 
     if (!database) {
         const config = app.config,
-        const sequelize = new Sequelize(
+        sequelize = new Sequelize(
             config.database,
             config.username,
             config.password,
@@ -33,11 +33,11 @@ export default (app) => {
             models: {}
         };
 
-         database.models = loadModels(sequelize);
+        database.models = loadModels(sequelize);
 
-        sequelize.sync().done() => {
-            return database
-        };
+        sequelize.sync().done(() => {
+            return database;
+        });
     }
 
     return database;

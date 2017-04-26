@@ -3,7 +3,7 @@ export default {
     username: '',
     password: '',
     params :{
-        dialect: 'sqllite',
+        dialect: 'sqlite',
         storege: 'books.sqlite',
         define:{
             underscored: true
