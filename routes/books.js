@@ -1,32 +1,43 @@
 import BooksControllers from '../controllers/books';
 
-export default (app, Books) => {
-    app.route('/books')
+export default (app) => {
+  const booksControllers = new BooksControllers(app.datasource.models.Books);
+
+  app.route('/books')
         .get((req, res) => {
-            Books.findAll({})
-                .then(result => res.json(result))
-                .catch(() => res.status(412));
+          booksControllers.getAll()
+                .then((response) => {
+                  res.status(response.statusCode);
+                  res.json(response.data);
+                });
         })
         .post((req, res) => {
-            Books.create(req.body)
-                .then(result => res.json(result))
-                .catch(() => res.status(412));
+          booksControllers.create(req.body)
+                .then((response) => {
+                  res.status(response.statusCode);
+                  res.json(response.data);
+                });
         });
 
-    app.route('/books/:id')
+  app.route('/books/:id')
         .get((req, res) => {
-            Books.findOne({ where: req.params })
-                .then(result => res.json(result))
-                .catch(() => res.status(412));
+          booksControllers.getById(req.params)
+                .then((response) => {
+                  res.status(response.statusCode);
+                  res.json(response.data);
+                });
         })
         .put((req, res) => {
-            Books.update(req.body, { where: req.params })
-                .then(result => res.json(result))
-                .catch(() => res.status(412));
+          booksControllers.update(req.body, req.params)
+                .then((response) => {
+                  res.status(response.statusCode);
+                  res.json(response.data);
+                });
         })
         .delete((req, res) => {
-            Books.destroy({ where: req.params })
-                .then(() => res.sendStatus(204))
-                .catch(() => res.status(412));
+          booksControllers.delete(req.params)
+                .then((response) => {
+                  res.sendStatus(response.statusCode);
+                });
         });
 };
