@@ -4,6 +4,7 @@ describe('Routes: Books', () => {
   const defaultBooks = {
     id: 1,
     name: 'Default Book',
+    description: 'Default description',
   };
 
     // detroi e roda o teste
@@ -21,6 +22,7 @@ describe('Routes: Books', () => {
       const booksList = Joi.array().items(Joi.object().keys({
         id: Joi.number(),
         name: Joi.string(),
+        description: Joi.string(),
         created_at: Joi.date().iso(),
         updated_at: Joi.date().iso(),
       }));
@@ -39,6 +41,7 @@ describe('Routes: Books', () => {
       const book = Joi.object().keys({
         id: Joi.number(),
         name: Joi.string(),
+        description: Joi.string(),
         created_at: Joi.date().iso(),
         updated_at: Joi.date().iso(),
       });
@@ -57,11 +60,13 @@ describe('Routes: Books', () => {
       const newBook = {
         id: 2,
         name: 'newBook',
+        description: 'newDescription',
       };
 
       const book = Joi.object().keys({
         id: Joi.number(),
         name: Joi.string(),
+        description: Joi.string(),
         created_at: Joi.date().iso(),
         updated_at: Joi.date().iso(),
       });
@@ -81,6 +86,7 @@ describe('Routes: Books', () => {
       const UpdatedBook = {
         id: 1,
         name: 'Updated Book',
+        decription: 'updated description',
       };
 
       const updateCount = Joi.array().items(1);

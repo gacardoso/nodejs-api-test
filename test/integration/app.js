@@ -4,6 +4,7 @@ describe('Routes: Books', () => {
   const defaultBooks = {
     id: 1,
     name: 'Default Book',
+    description: 'Default Description',
   };
 
   // detroi e roda o teste
@@ -23,6 +24,7 @@ describe('Routes: Books', () => {
         .end((err, res) => {
           expect(res.body[0].id).to.be.eql(defaultBooks.id);
           expect(res.body[0].name).to.be.eql(defaultBooks.name);
+          expect(res.body[0].description).to.be.eql(defaultBooks.description);
           done(err);
         });
     });
@@ -34,6 +36,8 @@ describe('Routes: Books', () => {
         .get('/books/1')
         .end((err, res) => {
           expect(res.body.id).to.be.eql(defaultBooks.id);
+          expect(res.body.name).to.be.eql(defaultBooks.name);
+          expect(res.body.description).to.be.eql(defaultBooks.description);
           done(err);
         });
     });
@@ -44,6 +48,7 @@ describe('Routes: Books', () => {
       const newBook = {
         id: 2,
         name: 'newBook',
+        description: 'newDescription',
       };
 
       request
@@ -52,7 +57,7 @@ describe('Routes: Books', () => {
         .end((err, res) => {
           expect(res.body.id).to.be.eql(newBook.id);
           expect(res.body.name).to.be.eql(newBook.name);
-
+          expect(res.body.description).to.be.eql(newBook.description);
           done(err);
         });
     });
