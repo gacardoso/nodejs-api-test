@@ -16,6 +16,8 @@
         "app": true,
         "request": true,
         "beforeEach": true,
-        "td": true
+        "td": true,
+        "Joi": true,
+        "joiAssert": true
     }
 }
