@@ -1,20 +1,33 @@
+import jwt from 'jwt-simple';
+
 describe('Routes: Users', () => {
   const Users = app.datasource.models.Users;
+  const jwtSecret = app.config.jwtSecret;
 
-  const defaultUsers = {
+  const defaultUser = {
     id: 1,
     name: 'Default User',
     email: 'test@email.com',
-    password: 'test'
+    password: 'test',
   };
+
+  let token;
 
   // detroi e roda o teste
   beforeEach((done) => {
     Users
       .destroy({ where: {} })
-      .then(() => Users.create(defaultUsers))
-      .then(() => {
-        done();
+      .then(() => Users.create({
+        name: 'John',
+        email: 'john@gmail.com',
+        password: '12345',
+      }))
+      .then((user) => {
+        Users.create(defaultUser)
+          .then(() => {
+            token = jwt.encode({ id: user.id }, jwtSecret);
+            done();
+          });
       });
   });
 
@@ -22,10 +35,11 @@ describe('Routes: Users', () => {
     it('should retun a list of users', (done) => {
       request
         .get('/users')
+        .set('Authorization', `JWT ${token}`)
         .end((err, res) => {
-          expect(res.body[0].id).to.be.eql(defaultUsers.id);
-          expect(res.body[0].name).to.be.eql(defaultUsers.name);
-          expect(res.body[0].email).to.be.eql(defaultUsers.email);
+          expect(res.body[0].id).to.be.eql(defaultUser.id);
+          expect(res.body[0].name).to.be.eql(defaultUser.name);
+          expect(res.body[0].email).to.be.eql(defaultUser.email);
           done(err);
         });
     });
@@ -35,10 +49,11 @@ describe('Routes: Users', () => {
     it('should retun a user', (done) => {
       request
         .get('/users/1')
+        .set('Authorization', `JWT ${token}`)
         .end((err, res) => {
-          expect(res.body.id).to.be.eql(defaultUsers.id);
-          expect(res.body.name).to.be.eql(defaultUsers.name);
-          expect(res.body.email).to.be.eql(defaultUsers.email);
+          expect(res.body.id).to.be.eql(defaultUser.id);
+          expect(res.body.name).to.be.eql(defaultUser.name);
+          expect(res.body.email).to.be.eql(defaultUser.email);
           done(err);
         });
     });
@@ -50,11 +65,12 @@ describe('Routes: Users', () => {
         id: 2,
         name: 'newUser',
         email: 'newEmail@email.com',
-        password: 'teste'
+        password: 'teste',
       };
 
       request
         .post('/users')
+        .set('Authorization', `JWT ${token}`)
         .send(newUser)
         .end((err, res) => {
           expect(res.body.id).to.be.eql(newUser.id);
@@ -70,11 +86,12 @@ describe('Routes: Users', () => {
       const UpdatedUser = {
         id: 1,
         name: 'Updated User',
-        email: 'update@mail.com'
+        email: 'update@mail.com',
       };
 
       request
         .put('/users/1')
+        .set('Authorization', `JWT ${token}`)
         .send(UpdatedUser)
         .end((err, res) => {
           // console.log('RESPONSE', res.body) //teste retorna linha afetadas
@@ -89,6 +106,7 @@ describe('Routes: Users', () => {
     it('should delete a user', (done) => {
       request
         .delete('/users/1')
+        .set('Authorization', `JWT ${token}`)
         .end((err, res) => {
           expect(res.statusCode).to.be.eql(204);
           done(err);

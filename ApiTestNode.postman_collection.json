@@ -1,0 +1,76 @@
+{
+	"variables": [],
+	"info": {
+		"name": "ApiTestNode",
+		"_postman_id": "479db875-fd3d-7483-6474-cb7e8b73bdf3",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/users",
+			"request": {
+				"url": "localhost:3000/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"gustavo\",\n\t\"email\":\"gustavo@email.com\",\n\t\"password\":\"123\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/token",
+			"request": {
+				"url": "localhost:3000/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"gustavo@email.com\",\n\t\"password\":\"123\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/books",
+			"request": {
+				"url": "localhost:3000/books",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.0F3fUCbAiXC9wv2xvWnTDlJS5ZW3IIqZidlDdvJB1A0",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"gustavo@email.com\",\n\t\"password\":\"123\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

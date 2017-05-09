@@ -10,7 +10,7 @@ export default {
     },
   },
   jwtSecret: 'SenhaSuperSecreta',
-  jwtSession: { session: false }
+  jwtSession: { session: false },
 };
 
 // storage: 'books.sqlite'
