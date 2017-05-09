@@ -9,6 +9,8 @@ export default {
       underscored: true,
     },
   },
+  jwtSecret: 'SenhaSuperSecreta',
+  jwtSession: { session: false }
 };
 
 // storage: 'books.sqlite'
