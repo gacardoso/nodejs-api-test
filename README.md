@@ -27,6 +27,8 @@ ES6, Babel, Express, Mocha, Sequeliza, SqLite3
     https://github.com/nodejs/node-gyp
     https://martinfowler.com/bliki/UnitTest.html
     https://github.com/hapijs/hapi/blob/master/lib/schema.js#L43
+    sinon.js
+    chai expct
 
 ##  Commands
     npm install babel babel-cli babel-preset-es2015 --save
